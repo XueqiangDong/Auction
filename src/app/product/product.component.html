@@ -1,3 +1,15 @@
-<p>
-  product works!
-</p>
+<div class="row">
+  <div *ngFor="let product of product" class="col-md-4 col-lg-4 product-card">
+    <div class="card">
+      <img class="card-img" [src]="imgUrl" alt="商品">
+      <div class="figure-caption">
+        <h5 class="card-title">{{product.title}}</h5>
+        <h5 class="text-right"><a>{{product.price}}</a></h5>
+        <p class="card-body">{{product.desc}}</p>
+      </div>
+      <div>
+        <app-stars [rating]="product.rating"></app-stars>
+      </div>
+    </div>
+  </div>
+</div>
