@@ -1,5 +1,13 @@
 <div class="row">
-  <div *ngFor="let product of products" class="col-md-6 col-lg-6 product-card">
+  <div class="col-sm-12">
+    <div class="form-group">
+      <input class="form-control product-card" placeholder="请输入商品名称"
+             [formControl]="titleFilter">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div *ngFor="let product of products | filter:'title':searchKeyWord" class="col-md-6 col-lg-6 product-card">
     <div class="card">
       <img class="card-img" [src]="imgUrl" alt="商品">
       <div class="figure-caption">
