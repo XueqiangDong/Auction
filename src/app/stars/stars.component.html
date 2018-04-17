@@ -1,5 +1,5 @@
 <p>
-  <span *ngFor="let star of stars" class="fa fa-star"
-  [class.fa-star-o]="star==0" [class.fa-star-half-o]="star==1"></span>
-  <span class="float-right">{{rating}}星</span>
+  <span *ngFor="let star of stars; let i=index;" class="fa fa-star"
+  [class.fa-star-o]="star==0" (click)="clickStar(i)" [class.fa-star-half-o]="star==1"></span>
+  <span class="float-right">{{rating | number:'1.0-0'}}星</span>
 </p>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ImportMetadata} from '@angular/compiler-cli/src/metadata/evaluator';
 
 @Component({
@@ -6,11 +6,18 @@ import {ImportMetadata} from '@angular/compiler-cli/src/metadata/evaluator';
   templateUrl: './stars.component.html',
   styleUrls: ['./stars.component.css']
 })
-export class StarsComponent implements OnInit {
+export class StarsComponent implements OnInit,OnChanges {
 
   protected stars: number[];
+
+  @Input()
+  protected readonly: boolean = true;
+
   @Input()
   protected rating: number = 0;
+
+  @Output()
+  protected ratingChange: EventEmitter<number> = new EventEmitter();
 
   constructor() {
   }
@@ -52,8 +59,22 @@ export class StarsComponent implements OnInit {
       case 5:
         this.stars = [2, 2, 2, 2, 2];
         break;
-      default: this.stars = [0, 0, 0, 0, 0];
+      default:
+        this.stars = [0, 0, 0, 0, 0];
     }
+  }
+
+  clickStar(index: number) {
+    if (!this.readonly) {
+      this.rating = index + 1;
+      // this.ngOnInit();
+      this.ratingChange.emit(this.rating);
+    } else {
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.ngOnInit();
   }
 
 }
