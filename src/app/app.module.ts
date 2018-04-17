@@ -11,14 +11,15 @@ import {ProductComponent} from './product/product.component';
 import {StarsComponent} from './stars/stars.component';
 import {ProductDetailComponent} from './product-detail/product-detail.component';
 import {HomeComponent} from './home/home.component';
-import {RouterModule, Routes} from '@angular/router';
+import {ActivatedRoute, RouterModule, Routes} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ProductService} from './shared/product.service';
-import { FilterPipe } from './pipe/filter.pipe';
+import {FilterPipe} from './pipe/filter.pipe';
 
 const routeConfig: Routes = [
   {path: '', component: HomeComponent},
   {path: 'product/:id', component: ProductDetailComponent},
+  {path: 'product', component: ProductDetailComponent}
 ];
 
 @NgModule({

@@ -1,3 +1,10 @@
+<!--<div class="row">-->
+  <!--<div class="col-sm-12">-->
+    <!--<a [routerLink]="['/product']" [queryParams]="{id:2}">测试链接到第2个商品</a>-->
+    <!--<a [routerLink]="['/product',2]">测试链接到第2个商品</a>-->
+<!--上面为什么不行？ -->
+<!--</div>-->
+<!--</div>-->
 <div class="row">
   <div class="col-sm-12">
     <div class="form-group">
@@ -11,7 +18,8 @@
     <div class="card">
       <img class="card-img" [src]="imgUrl" alt="商品">
       <div class="figure-caption">
-        <span class="h3"><a [routerLink]="['/product',product.id]">{{product.title}}</a></span>
+        <!--<span class="h3"><a [routerLink]="['/product',product.id]">{{product.title}}</a></span>-->
+        <span class="h3"><a [routerLink]="['/product']" [queryParams]="{id:product.id}">{{product.title}}</a></span>
         <span class="float-right h5"><a>{{product.price}}</a></span>
         <p class="card-body">{{product.desc}}</p>
       </div>
