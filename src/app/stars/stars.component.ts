@@ -6,7 +6,7 @@ import {ImportMetadata} from '@angular/compiler-cli/src/metadata/evaluator';
   templateUrl: './stars.component.html',
   styleUrls: ['./stars.component.css']
 })
-export class StarsComponent implements OnInit,OnChanges {
+export class StarsComponent implements OnInit, OnChanges {
 
   protected stars: number[];
 
@@ -24,7 +24,17 @@ export class StarsComponent implements OnInit,OnChanges {
 
   ngOnInit() {
 
-    this.stars = [];
+    this.stars = [0, 0, 0, 0, 0];
+
+    // for (let i = 0; i <= 4; i++){
+    //   if ((this.rating - 1) < i){
+    //     for (let j = 0; j <= i; j++){
+    //       this.stars[j] = 2;
+    //     }
+    //     break;
+    //   }
+    // }
+
     switch (this.rating) {
       case 0:
         this.stars = [0, 0, 0, 0, 0];
@@ -71,6 +81,7 @@ export class StarsComponent implements OnInit,OnChanges {
       this.ratingChange.emit(this.rating);
     } else {
     }
+    console.log(this.rating);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
