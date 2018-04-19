@@ -1,37 +1,41 @@
 import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 @Injectable()
 export class ProductService {
 
-  protected products: Product[] = [
-    new Product(1, '第1个商品', 1.99, 0, '吸尘器，清洗灰尘', ['电子产品', '装修家具']),
-    new Product(2, '第2个商品', 2.99, 4.5, '吸尘器，清洗灰尘，好用', ['电子产品', '装修家具']),
-    new Product(3, '第3个商品', 10.99, 3.5, '吸尘器，清洗灰尘', ['电子产品', '装修家具', '灌溉系统']),
-    new Product(4, '第4个商品', 16.99, 1.5, '好用,清洗灰尘', ['电子产品', '装修家具']),
-    new Product(5, '第5个商品', 41.99, 4.5, '吸尘器，清洗灰尘', ['电子产品', '装修家具']),
-    new Product(6, '第6个商品', 441.99, 5, '吸尘器，清洗灰尘', ['电子产品', '装修家具'])
-  ];
-  protected comments: CommentProduct[] = [
-    new CommentProduct(1, 1, '2017-03-05', '张三', 5, '东西很好'),
-    new CommentProduct(2, 1, '2016-03-05', '李四', 2, '一般'),
-    new CommentProduct(3, 1, '2015-03-05', '王五', 3, '一般'),
-    new CommentProduct(4, 2, '2018-03-05', '马六', 5, '东西超级好'),
-    new CommentProduct(5, 1, '2017-09-05', '严琦', 1, '差'),
-  ];
+  // protected products: Product[] = [
+  //   new Product(1, '第1个商品', 1.99, 0, '吸尘器，清洗灰尘', ['电子产品', '装修家具']),
+  //   new Product(2, '第2个商品', 2.99, 4.5, '吸尘器，清洗灰尘，好用', ['电子产品', '装修家具']),
+  //   new Product(3, '第3个商品', 10.99, 3.5, '吸尘器，清洗灰尘', ['电子产品', '装修家具', '灌溉系统']),
+  //   new Product(4, '第4个商品', 16.99, 1.5, '好用,清洗灰尘', ['电子产品', '装修家具']),
+  //   new Product(5, '第5个商品', 41.99, 4.5, '吸尘器，清洗灰尘', ['电子产品', '装修家具']),
+  //   new Product(6, '第6个商品', 441.99, 5, '吸尘器，清洗灰尘', ['电子产品', '装修家具'])
+  // ];
+  // protected comments: CommentProduct[] = [
+  //   new CommentProduct(1, 1, '2017-03-05', '张三', 5, '东西很好'),
+  //   new CommentProduct(2, 1, '2016-03-05', '李四', 2, '一般'),
+  //   new CommentProduct(3, 1, '2015-03-05', '王五', 3, '一般'),
+  //   new CommentProduct(4, 2, '2018-03-05', '马六', 5, '东西超级好'),
+  //   new CommentProduct(5, 1, '2017-09-05', '严琦', 1, '差'),
+  // ];
 
-  constructor() {
+  constructor(protected http: Http) {
   }
 
-  getAllCategories():string[]{
-    return['电子产品', '装修家具'];
+  getAllCategories(): string[] {
+    return ['电子产品', '装修家具'];
   }
 
-  getProducts(): Product[] {
-    return this.products;
+  getProducts(): Observable<Product[]> {
+    return this.http.get('/api/products').map(res => res.json());
   }
 
-  getProduct(id: number): Product {
-    return this.products.find((product) => product.id == id);
+  getProduct(id: number): Observable<Product> {
+    return this.http.get('/api/products/' + id).map(res => res.json());
+    // return this.products.find((product) => product.id == id);
     // console.log(id);
     // let prod: Product;
     // prod = this.products.find((product) => product.id == id);
@@ -44,8 +48,9 @@ export class ProductService {
     // return this.products[index];
   }
 
-  getCommentsForProductId(id: number): CommentProduct[] {
-    return this.comments.filter((comment: CommentProduct) => comment.productId == id);
+  getCommentsForProductId(id: number): Observable<CommentProduct[]> {
+    return this.http.get('/api/products/' + id + '/comments').map(res => res.json());
+    // this.comments.filter((comment: CommentProduct) => comment.productId == id);
   }
 }
 

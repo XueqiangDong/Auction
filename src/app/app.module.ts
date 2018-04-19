@@ -15,11 +15,13 @@ import {ActivatedRoute, RouterModule, Routes} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ProductService} from './shared/product.service';
 import {FilterPipe} from './pipe/filter.pipe';
+import {HttpModule} from '@angular/http';
 
 const routeConfig: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'product/:id', component: ProductDetailComponent},
-  {path: 'product', component: ProductDetailComponent}
+  // {path: 'product/:id', component: ProductDetailComponent},
+  {path: 'products/:id', component: ProductDetailComponent},
+  {path: 'products', component: ProductDetailComponent}
 ];
 
 @NgModule({
@@ -40,6 +42,7 @@ const routeConfig: Routes = [
     FormsModule,
     RouterModule.forRoot(routeConfig),
     ReactiveFormsModule,
+    HttpModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
