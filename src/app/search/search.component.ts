@@ -11,14 +11,24 @@ export class SearchComponent implements OnInit {
 
   formModel: FormGroup;
   categories: string[];
+  // 测试代码
+  // testForm: FormGroup;
+
+  // 测试代码
 
   constructor(protected productService: ProductService) {
     let fb = new FormBuilder();
     this.formModel = fb.group({
       title: ['', Validators.minLength(3)],
       price: [null, this.positiveNumberValidator],
-      category: ['-1']
+      category: ['']
     });
+
+    // let fb1 = new FormBuilder();
+    // this.testForm = fb1.group({
+    //   user: ['65'],
+    //   list:['']
+    // });
   }
 
   ngOnInit() {
@@ -40,7 +50,13 @@ export class SearchComponent implements OnInit {
   onSearch() {
     if (this.formModel.valid) {
       console.log(this.formModel.value);
+      this.productService.searchEvent.emit(this.formModel.value);
     }
   }
+
+  // onTest() {
+  //   console.log(this.formModel.value);
+  //   console.log('测试提交被按下' + this.testForm.value + '有效性:' + this.testForm.valid);
+  // }
 
 }

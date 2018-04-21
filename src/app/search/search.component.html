@@ -16,7 +16,7 @@
   <div class="form-group">
     <label for="productCategory">商品类别：</label>
     <select formGroupName="category" id="productCategory" class="form-control">
-      <option value="-1">全部分类</option>
+      <option value="null">全部分类</option>
       <option *ngFor="let category of categories" [value]="category">{{category}}</option>
     </select>
   </div>
@@ -24,3 +24,14 @@
     <button type="submit" class="btn btn-primary btn-block">搜索</button>
   </div>
 </form>
+<!--以下内容这是一段测试代码-->
+<!--<form [formGroup]="testForm" (ngSubmit)="onTest()" novalidate>-->
+  <!--<div>-->
+    <!--<input type="text" formControlName="user" placeholder="请输入">-->
+    <!--<select formGroupName="list">-->
+      <!--<option value="list01">list01</option>-->
+      <!--<option value="list02">list01</option>-->
+    <!--</select>-->
+    <!--<button type="submit">提交</button>-->
+  <!--</div>-->
+<!--</form>-->
